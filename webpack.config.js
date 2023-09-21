@@ -12,7 +12,7 @@ module.exports = {
       import: './src/another-module.js',
       dependOn: 'shared',
     },
-    page: ['./analytics', './app'],
+    // page: ['./analytics', './app'],
     shared: 'lodash',
   },
   devtool: 'inline-source-map', // 显示源代码错误位置
