@@ -3,17 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    print: './src/print.js',
-    index: {
-      import: './src/index.js',
-      dependOn: 'shared',
-    },
-    another: {
-      import: './src/another-module.js',
-      dependOn: 'shared',
-    },
-    // page: ['./analytics', './app'],
-    shared: 'lodash',
+    index: './src/index.js',
+    // print: './src/print.js',
+    // index: {
+    //   import: './src/index.js',
+    //   dependOn: 'shared',
+    // },
+    // another: {
+    //   import: './src/another-module.js',
+    //   dependOn: 'shared',
+    // },
+    // // page: ['./analytics', './app'],
+    // shared: 'lodash',
   },
   devtool: 'inline-source-map', // 显示源代码错误位置
   devServer: {
