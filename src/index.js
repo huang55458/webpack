@@ -31,19 +31,6 @@ function component() {
   element.appendChild(btn);
 
 
-window.test = function (arr) {
-  let len = arr.length;
-  for (let i = 0; i < len - 1; i++) {
-    for (let j = i+1; j < len; j++) {
-      let r = arr[i].some(item => arr[j].includes(item));
-      if (r === true) {
-        return [i,j]
-      }
-    }
-  }
-}
-
-
   return element;
 }
 

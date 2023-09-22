@@ -28,9 +28,9 @@ function  getComponent() {
     })
     .catch((error) => 'An error occurred while loading the component');
 }
-getComponent().then((component) => {
-  document.body.appendChild(component);
-});
+// getComponent().then((component) => {
+//   document.body.appendChild(component);
+// });
 //异步动态导入
 async function getComponent2() {
   const element = document.createElement('div');

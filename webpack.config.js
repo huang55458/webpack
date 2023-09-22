@@ -1,9 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const target = 'https://a.chumeng1.top'
+const PORT = 10000
+const local = `http://localhost:${PORT}`
 
 module.exports = {
+  // entry: './src/index.js',
   entry: {
-    index: './src/index.js',
+    index: './src/login/index.js',
     // print: './src/print.js',
     // index: {
     //   import: './src/index.js',
@@ -18,17 +22,52 @@ module.exports = {
   },
   devtool: 'inline-source-map', // 显示源代码错误位置
   devServer: {
-    static: './dist',
+    // disableHostCheck: true,
+    host: '0.0.0.0',
+    // contentBase: path.resolve(__dirname, './'),
+    static: './',
+    // stats: { colors: true,
+    //     env: true,
+    //     timings: true,
+    //     warnings: false,
+    //     errors: true,
+    //     all: false
+    // },
+    port: 10000,
+    proxy: {
+      '/api/*': {
+        changeOrigin: true,
+        target,
+        onProxyReq(proxyReq, req, res) {
+          console.log(`${target}${req.path}`)
+          proxyReq.setHeader('Referer', `${target}${req.path}`)
+        },
+        router: () => target
+      },
+      '/static/logo_test/*': {
+        target,
+        router: () => target
+      },
+      '/': {
+        target: local,
+        pathRewrite: { '^/.*': '/src/login/login.html' },
+        bypass(req) {
+          if (/.*\..*$/.test(req.path)) return req.path
+        }
+      },
+    },
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: '管理输出',
-    }),
-  ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     title: '管理输出',
+  //   }),
+  // ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    chunkFilename: 'scripts/[name].bundle.js',
+    publicPath: '/dist/'
+    // clean: true,
   },
   module: {
     rules: [
@@ -56,9 +95,9 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-    },
+    // splitChunks: {
+    //   chunks: 'all',
+    // },
   },
   mode: 'development'
 };
