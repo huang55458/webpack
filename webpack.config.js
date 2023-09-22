@@ -3,6 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const target = 'https://a.chumeng1.top'
 const PORT = 10000
 const local = `http://localhost:${PORT}`
+// const local = `http://127.0.0.1:${PORT}`
+
+const webpack = require('webpack');
+
+[
+  new webpack.DefinePlugin({
+    MY_ENV: JSON.stringify('dev'),
+  }),
+],
+
 
 module.exports = {
   // entry: './src/index.js',
