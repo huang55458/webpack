@@ -44,9 +44,9 @@ module.exports = {
         },
         router: () => target
       },
-      '/static/logo_test/*': {
-        target,
-        router: () => target
+      '/page/*.html': {
+        target: local,
+        pathRewrite: { '/page/': '/src/page/' },
       },
       '/': {
         target: local,
